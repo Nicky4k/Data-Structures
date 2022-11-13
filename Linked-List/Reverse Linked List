@@ -1,0 +1,99 @@
+class Node {
+  value;
+  next;
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
+
+  insertElement(el) {
+    if (!el) return;
+    const node = new Node(el);
+    let current;
+    if (!this.head) {
+      this.head = node;
+    } else {
+      current = this.head;
+      for (let i = 1; i <= this.size - 1; i++) {
+        if (current.next) current = current.next;
+      }
+      current.next = node;
+    }
+    this.size++;
+  }
+
+  displayList() {
+    let curr = this.head;
+    let op = "head > ";
+    for (let i = 1; i <= this.size; i++) {
+      curr.next
+        ? ((op += curr.value + " > "), (curr = curr.next))
+        : (op += curr.value + " > tail ");
+    }
+    console.log(op);
+  }
+
+  reverseList() {
+    let prevNode = this.head;
+    let currNode = this.head.next;
+    let nextNode = this.head.next.next;
+    if (!nextNode) {
+      this.head = currNode;
+      this.head.next = prevNode;
+      prevNode.next = null;
+    } else {
+      this.head.next = null;
+      while (currNode.next) {
+        // re-establishing next connection
+        currNode.next = prevNode;
+
+        // updating pointers
+        prevNode = currNode;
+        currNode = nextNode;
+        nextNode = nextNode.next;
+      }
+      currNode.next = prevNode;
+      this.head = currNode;
+    }
+  }
+
+  reverseBetween(left, right) {
+    let previous = null;
+    let current = this.head;
+    let last;
+    let newEnd;
+    for (let i = 0; current != null && i < left - 1; i++) {
+      previous = current;
+      current = current.next;
+    }
+    last = previous;
+    newEnd = current;
+
+    // now reverse between left and right.
+    let nextNode = current.next;
+    for (let i = 0; current != null && i < right - left + 1; i++) {
+      // re-establishing next connection
+      current.next = previous;
+
+      // updating pointers
+      previous = current;
+      current = nextNode;
+      if (nextNode != null) {
+        nextNode = nextNode.next;
+      }
+    }
+    if (last != null) {
+      last.next = previous;
+    } else {
+      this.head = previous;
+    }
+    newEnd.next = current;
+  }
+}
