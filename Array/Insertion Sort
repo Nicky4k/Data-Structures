@@ -1,0 +1,14 @@
+const rgb = [2, 78, 1, 6, 20, 71, 2, 0, -2];
+let temp;
+for (i = 0; i < rgb.length; i++) {
+  for (j = i + 1; j > 0; j--) {
+    if (rgb[j] < rgb[j - 1]) {
+      temp = rgb[j - 1];
+      rgb[j - 1] = rgb[j];
+      rgb[j] = temp;
+    } else {
+      break;
+    }
+  }
+}
+console.log(rgb);
