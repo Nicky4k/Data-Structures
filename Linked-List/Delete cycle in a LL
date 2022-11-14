@@ -1,0 +1,24 @@
+deleteCycle() {
+    if (this.head === null || this.head.next === null) return false;
+    let slow = this.head;
+    let fast = this.head;
+    let start = this.head;
+    let tempPointer;
+
+    while (slow && fast) {
+      if (!fast.next) break;
+      tempPointer = slow;
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow === fast) {
+        while (slow != start) {
+          tempPointer = tempPointer.next;
+          slow = slow.next;
+          start = start.next;
+        }
+        tempPointer.next = null;
+        break;
+      }
+    }
+    if (!fast.next) return false;
+  }
