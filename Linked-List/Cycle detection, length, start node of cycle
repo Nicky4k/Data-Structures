@@ -1,0 +1,74 @@
+class Node {
+  value;
+  next;
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
+
+  insertElement(el) {
+    if (!el) return;
+    const node = new Node(el);
+    let current;
+    if (!this.head) {
+      this.head = node;
+    } else {
+      current = this.head;
+      for (let i = 1; i <= this.size - 1; i++) {
+        if (current.next) current = current.next;
+      }
+      current.next = node;
+    }
+    this.size++;
+  }
+
+  displayList() {
+    let curr = this.head;
+    let op = "head > ";
+    for (let i = 1; i <= this.size; i++) {
+      curr.next
+        ? ((op += curr.value + " > "), (curr = curr.next))
+        : (op += curr.value + " > tail ");
+    }
+    console.log(op);
+  }
+
+  isCycle() {
+    if (this.head === null || this.head.next === null) return false;
+    let slow = this.head;
+    let fast = this.head;
+    let start = this.head;
+    let tempPointer;
+    let cycleLength = 1;
+
+    while (slow && fast) {
+      if (!fast.next) break;
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow === fast) {
+        console.log("Cycle found in the linked list");
+        tempPointer = slow;
+        tempPointer = tempPointer.next;
+        while (tempPointer != slow) {
+          cycleLength++;
+          tempPointer = tempPointer.next;
+        }
+        console.log(`Length of cycle: ${cycleLength}`);
+        while (slow != start) {
+          slow = slow.next;
+          start = start.next;
+        }
+        console.log(`Cycle starts at node: ${start.value}`);
+        break;
+      }
+    }
+    if (!fast.next) console.log("No cycle found in the linked list.");
+  }
+}
