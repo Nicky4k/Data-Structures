@@ -1,0 +1,29 @@
+// find nth fibonacci number.
+let sum = 0;
+function fibb(n) {
+  if (n === 0) return console.log(`fibonacci sum of is: ${sum}`);
+  sum += n;
+  fibb(--n);
+}
+fibb(4);
+console.log(sum);
+
+// fibonacci series of n
+let base = 0;
+let next = 1;
+let temp;
+function fibbSeries(n) {
+  console.log("fibonacci", base);
+  temp = base;
+  base = next;
+  next = next + temp;
+  if (n >= 1) {
+    fibbSeries(--n);
+  }
+}
+fibbSeries(9);
+
+function fibbo(n) {
+  return n < 2 ? n : fibbo(n - 1) + fibbo(n - 2);
+}
+console.log(fibbo(5));
