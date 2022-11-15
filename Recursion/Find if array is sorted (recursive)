@@ -1,0 +1,3 @@
+function isSorted(arr) {
+  return arr[0] > arr[1] ? false : arr[1] ? isSorted(arr.slice(1)) : true;
+}
