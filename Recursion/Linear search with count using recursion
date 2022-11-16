@@ -1,0 +1,14 @@
+let results = {};
+
+function linearSearch(arr, x, i = 0) {
+  return arr[i] === x
+    ? (results[arr[i]]
+        ? (results[arr[i]] = results[arr[i]] + 1)
+        : (results[arr[i]] = 1),
+      linearSearch(arr, x, ++i))
+    : arr[i + 1]
+    ? linearSearch(arr, x, ++i)
+    : false;
+}
+
+linearSearch([35, 6, 224, 6, 6, 17, 43], 6);
