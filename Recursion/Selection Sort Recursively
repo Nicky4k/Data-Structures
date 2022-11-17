@@ -1,0 +1,16 @@
+function sSortRec(arr, r = arr.length, c = 0, m = 0) {
+  if (r === 0) return;
+
+  if (c < r) {
+    if (arr[c] > arr[m]) {
+      sSortRec(arr, r, ++c, c);
+    } else {
+      sSortRec(arr, r, ++c, m);
+    }
+  } else {
+    let temp = arr[m];
+    arr[m] = arr[r - 1];
+    arr[r - 1] = temp;
+    sSortRec(arr, --r, 0, 0);
+  }
+}
